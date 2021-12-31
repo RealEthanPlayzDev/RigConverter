@@ -1,0 +1,5 @@
+local Players = game:GetService("Players")
+script.Parent.Died:Connect(function()
+	task.wait(Players.RespawnTime)
+	Players:WaitForChild(script.Parent.Parent.Name):LoadCharacter()
+end)
