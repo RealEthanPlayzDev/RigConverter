@@ -1,6 +1,6 @@
 --[[
 File name: RigComverter.luau
-Author: RadiatedExodus (ItzEthanPlayz_YT/RealEthanPlayzDev)
+Author: RadiatedExodus (RealEthanPlayzDev)
 Created at: December 31 2021
 
 Used for converting between R15 and R6
