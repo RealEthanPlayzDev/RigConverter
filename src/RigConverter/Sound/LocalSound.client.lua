@@ -1,3 +1,4 @@
+--!nocheck
 --[[
 	Author: @spotco
 	This script runs locally for the player of the given humanoid.
@@ -39,22 +40,25 @@ local useSoundDispatcher = UserSettings():IsUserFeatureEnabled("UserUseSoundDisp
 
 if useSoundDispatcher then
 	if not soundEventFolder then
-		soundEventFolder = Instance.new("Folder", ReplicatedStorage)
+		soundEventFolder = Instance.new("Folder")
 		soundEventFolder.Name = soundEventFolderName
 		soundEventFolder.Archivable = false
+		soundEventFolder.Parent = ReplicatedStorage
 	end
 	
 	-- Load the RemoveCharacterEvent
 	RemoveCharacterEvent = soundEventFolder:FindFirstChild("RemoveCharacterEvent")
 	if RemoveCharacterEvent == nil then
-		RemoveCharacterEvent = Instance.new("RemoteEvent", soundEventFolder)
+		RemoveCharacterEvent = Instance.new("RemoteEvent")
 		RemoveCharacterEvent.Name = "RemoveCharacterEvent"
+		RemoveCharacterEvent.Parent = soundEventFolder
 	end
 
 	AddCharacterLoadedEvent = soundEventFolder:FindFirstChild("AddCharacterLoadedEvent")
 	if AddCharacterLoadedEvent == nil then
-		AddCharacterLoadedEvent = Instance.new("RemoteEvent", soundEventFolder)
+		AddCharacterLoadedEvent = Instance.new("RemoteEvent")
 		AddCharacterLoadedEvent.Name = "AddCharacterLoadedEvent"
+		AddCharacterLoadedEvent.Parent = soundEventFolder
 	end
 
 	-- Notify the server a new character has been loaded

@@ -1,3 +1,4 @@
+--!nolint LocalShadow
 --[[
 	Author: @spotco
 	This script creates sounds which are placed under the character head.
@@ -31,9 +32,11 @@ end
 
 if not DefaultServerSoundEvent then
 	if useSoundDispatcher then
-		DefaultServerSoundEvent = Instance.new("RemoteEvent", SoundEventFolder)
+		DefaultServerSoundEvent = Instance.new("RemoteEvent")
+		DefaultServerSoundEvent.Parent = SoundEventFolder
 	else
-		DefaultServerSoundEvent = Instance.new("RemoteEvent", ReplicatedStorage)
+		DefaultServerSoundEvent = Instance.new("RemoteEvent")
+		DefaultServerSoundEvent.Parent = ReplicatedStorage
 	end
 
 	DefaultServerSoundEvent.Name = DEFAULT_SERVER_SOUND_EVENT_NAME
@@ -53,7 +56,7 @@ local function CreateNewSound(name, id, looped, pitch, parent)
 	sound.Parent = parent
 
 	if DefaultServerSoundEvent then
-		local CharacterSoundEvent = Instance.new("RemoteEvent", sound)
+		local CharacterSoundEvent = Instance.new("RemoteEvent")
 		CharacterSoundEvent.Name = "CharacterSoundEvent"
 		CharacterSoundEvent.OnServerEvent:Connect(function(player, playing, resetPosition)
 			if type(playing) ~= "boolean" then
@@ -77,6 +80,7 @@ local function CreateNewSound(name, id, looped, pitch, parent)
 				end
 			end
 		end)
+		CharacterSoundEvent.Parent = sound
 	end
 	return sound
 end
